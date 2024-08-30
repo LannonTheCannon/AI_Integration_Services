@@ -4,6 +4,7 @@ import requests
 from datetime import datetime, time, timedelta
 import json
 import os
+from security import safe_requests
 
 def load_lottiefile(filepath: str):
     with open(filepath, "r") as f:
@@ -11,7 +12,7 @@ def load_lottiefile(filepath: str):
 
 def load_lottieurl(url: str):
     try:
-        r = requests.get(url)
+        r = safe_requests.get(url)
         if r.status_code != 200:
             return None
         return r.json()
